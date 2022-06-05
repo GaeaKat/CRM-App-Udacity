@@ -24,6 +24,7 @@ export function* takeLoadRegions() {
             'Northern Ireland',
             'Wales'
         ];
+        result.sort((a,b)=>a.localeCompare(b));
         yield put(actions.setRegions(result));
     } catch( error)  {
 

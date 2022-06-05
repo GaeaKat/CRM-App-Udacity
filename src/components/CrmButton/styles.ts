@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
     },
+    buttonDisabled: {
+        backgroundColor: '#8d8de2',
+        padding: 10,
+        margin: 10,
+    },
     buttonText: {
         color: '#ffff'
     }
