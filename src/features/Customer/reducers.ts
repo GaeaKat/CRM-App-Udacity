@@ -19,7 +19,10 @@ export interface CustomerState {
     },
     edit: {
         status: LoadingState,
-    }
+    },
+    clear: {
+      status: LoadingState,
+    },
     error: {
         message: string|null|undefined;
     },
@@ -59,6 +62,9 @@ const initialState: CustomerState = {
     },
     edit: {
         status: LoadingState.Pending
+    },
+    clear: {
+        status:LoadingState.Pending
     }
 }
 
@@ -107,6 +113,16 @@ const slice = createSlice({
           state.list.status=LoadingState.Error;
           state.error.message=payload;
         },
+        clearCustomers:(state) => {
+          state.list.status=LoadingState.Requesting
+        },
+        clearCustomersResult: (state, { payload }:PayloadAction<Array<Customer>>) => {
+            state.clear.status=LoadingState.Success;
+            state.list.customers=payload;
+        },
+        clearCustomersError: (state, {payload}:PayloadAction<string>) => {
+          state.clear.status = LoadingState.Error
+        },
         loadRegions: (state) => {
             state.regions.status=LoadingState.Requesting;
         },
@@ -149,6 +165,9 @@ export const {
     editCustomer,
     editCustomerResult,
     editCustomerError,
+    clearCustomers,
+    clearCustomersError,
+    clearCustomersResult
 } = slice.actions;
 
 export default slice.reducer;
